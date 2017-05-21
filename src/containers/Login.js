@@ -58,8 +58,8 @@ export default class Login extends React.Component {
 
 				<View style={ styles.form }>
 					<View style={ styles.group }>
-						<TextInput style={ styles.input } keyboardAppearance='dark' keyboardType='email-address' placeholder='Correo Electrónico'/>
-						<TextInput style={ styles.input } keyboardAppearance='dark' password placeholder='Contraseña'/>
+						<TextInput style={ styles.input } underlineColorAndroid='transparent' keyboardAppearance='dark' keyboardType='email-address' placeholder='Correo Electrónico'/>
+						<TextInput style={ styles.input } underlineColorAndroid='transparent' keyboardAppearance='dark' password placeholder='Contraseña'/>
 					</View>
 
 					<TouchableHighlight type='submit' style={ styles.submit } onPress={ () => this.login() }>

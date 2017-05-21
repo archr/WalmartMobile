@@ -6,8 +6,8 @@ export default class UserImage extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Image source={ require('../img/profile.jpg') } style={styles.image} />
-        <Text style={styles.name}>Manuel Logan</Text>
+        <Image source={require('../img/profile.jpg')} style={styles.image} />
+        <Text style={styles.name}>Alex Cavazos</Text>
         <View style={styles.balanceContainer}>
           <Balance />
         </View>
@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   image: {
-    backgroundColor: 'white',
     width: 70,
     height: 70,
     borderRadius: 35,
