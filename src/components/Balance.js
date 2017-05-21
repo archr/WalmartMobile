@@ -10,6 +10,6 @@ export default class Balance extends React.Component {
 const styles = StyleSheet.create({
   balance: {
     color: '#18bd27',
-    fontSize: 26
+    fontSize: 20
   }
 })
