@@ -9,7 +9,7 @@ export default class UserImage extends React.Component {
         <Image source={require('../img/profile.jpg')} style={styles.image} />
         <Text style={styles.name}>Alex Cavazos</Text>
         <View style={styles.balanceContainer}>
-          <Balance />
+          <Balance balance={this.props.balance} />
         </View>
       </View>
     )

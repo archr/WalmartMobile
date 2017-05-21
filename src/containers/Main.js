@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StatusBar, StyleSheet, Dimensions } from 'react-native'
+import { Alert, View, StatusBar, StyleSheet, Dimensions } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import UserHeader from '~components/UserHeader'
 import MenuItem from '~components/MenuItem'
@@ -8,8 +8,33 @@ import ButtonRounded from '~components/ButtonRounded'
 const { width } = Dimensions.get('window')
 
 export default class Main extends React.Component {
-  onPressScanTicket () {
-    Actions.barScanner()
+  constructor () {
+    super()
+
+    this.state = {
+      balance: 552
+    }
+  }
+
+  onPressScanTicket = () => {
+    const balance = this.state.balance + 10
+    const message = `Se ha actualizado tu saldo $ ${parseFloat(balance).toFixed(2)}`
+    const buttons = [
+      {
+        text: 'OK',
+        onPress: () => {
+          this.setState({ balance }, () => Actions.pop())
+        }
+      }
+    ]
+
+    Actions.barScanner({
+      passProps: {
+        onScan: () => {
+          Alert.alert('Nuevo saldo', message, buttons)
+        }
+      }
+    })
   }
 
   render () {
@@ -17,7 +42,7 @@ export default class Main extends React.Component {
       <View style={styles.container}>
         <StatusBar backgroundColor='#2684e2' barStyle='light-content' />
         <View style={styles.content}>
-          <UserHeader />
+          <UserHeader balance={this.state.balance} />
           <View style={[styles.menuContainer, { width }]}>
             <MenuItem title='Mis listas' icon='list' />
             <MenuItem title='Mis pedidos' icon='shopping-cart' />

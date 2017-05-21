@@ -3,7 +3,7 @@ import { Text, StyleSheet } from 'react-native'
 
 export default class Balance extends React.Component {
   render () {
-    return <Text style={styles.balance}>$ 552.00</Text>
+    return <Text style={styles.balance}>$ {parseFloat(this.props.balance).toFixed(2)}</Text>
   }
 }
 

@@ -1,13 +1,8 @@
 import React from 'react'
 import { View, Text, StatusBar, TouchableWithoutFeedback, StyleSheet } from 'react-native'
-import { Actions } from 'react-native-router-flux'
 import Camera from 'react-native-camera'
 
 export default class BarScanner extends React.Component {
-  onPress = () => {
-    Actions.pop()
-  }
-
   render () {
     return (
       <View style={styles.container}>
@@ -20,10 +15,9 @@ export default class BarScanner extends React.Component {
             }}
             style={styles.preview}
             aspect={Camera.constants.Aspect.fill}
-            onBarCodeRead={() => console.log('onBarCodeRead')}
           />
 
-          <TouchableWithoutFeedback onPress={this.onPress}>
+          <TouchableWithoutFeedback onPress={this.props.passProps.onScan}>
             <View style={styles.button} />
           </TouchableWithoutFeedback>
         </View>
