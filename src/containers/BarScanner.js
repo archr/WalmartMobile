@@ -1,10 +1,11 @@
 import React from 'react'
 import { View, Text, StatusBar, TouchableWithoutFeedback, StyleSheet } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 import Camera from 'react-native-camera'
 
 export default class BarScanner extends React.Component {
   onPress = () => {
-    console.log('onPress')
+    Actions.pop()
   }
 
   render () {

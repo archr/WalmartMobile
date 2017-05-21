@@ -1,11 +1,17 @@
 import React from 'react'
 import { View, StatusBar, StyleSheet, Dimensions } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 import UserHeader from '~components/UserHeader'
 import MenuItem from '~components/MenuItem'
+import ButtonRounded from '~components/ButtonRounded'
 
 const { width } = Dimensions.get('window')
 
 export default class Main extends React.Component {
+  onPressScanTicket () {
+    Actions.barScanner()
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -19,6 +25,10 @@ export default class Main extends React.Component {
             <MenuItem title='Historial' icon='history' />
             <MenuItem title='Ajustes' icon='settings' />
             <MenuItem title='Servicio al cliente' icon='contact-mail' />
+
+            <View style={styles.barScannerContainer}>
+              <ButtonRounded onPress={this.onPressScanTicket}>Escanear Ticket</ButtonRounded>
+            </View>
           </View>
         </View>
       </View>
@@ -45,10 +55,18 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 20,
     width: 300,
     backgroundColor: 'white',
     flexDirection: 'row',
     flexWrap: 'wrap'
+  },
+  barScannerContainer: {
+    width,
+    paddingLeft: 20,
+    paddingRight: 20,
+    height: 60,
+    position: 'absolute',
+    bottom: 0
   }
 })
