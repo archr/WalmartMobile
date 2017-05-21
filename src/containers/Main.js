@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 30,
     width: 300,
     backgroundColor: 'white',
     flexDirection: 'row',

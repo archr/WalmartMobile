@@ -1,12 +1,12 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import Balance from './Balance'
 
 export default class UserImage extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <View style={styles.image} />
+        <Image source={ require('../img/profile.jpg') } style={styles.image} />
         <Text style={styles.name}>Manuel Logan</Text>
         <View style={styles.balanceContainer}>
           <Balance />
@@ -25,14 +25,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: 70,
     height: 70,
-    borderRadius: 70,
-    marginBottom: 10
+    borderRadius: 35,
+    marginBottom: 10,
+    marginTop: 15
   },
   name: {
     color: 'white',
     fontSize: 20
   },
   balanceContainer: {
-    marginTop: 20
+    marginTop: 10
   }
 })

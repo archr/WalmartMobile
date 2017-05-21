@@ -50,15 +50,15 @@ export default class Login extends React.Component {
 		Actions.main({ type: 'replace' });
 	}
 
-  render () {
-    return (
-      <View style={ styles.container }>
-      	<StatusBar barStyle='light-content'></StatusBar>
-        <Text style={ styles.header }>Ingresa a tu cuenta</Text>
+	render () {
+		return (
+			<View style={ styles.container }>
+				<StatusBar barStyle='light-content'></StatusBar>
+				<Text style={ styles.header }>Ingresa a tu cuenta</Text>
 
 				<View style={ styles.form }>
 					<View style={ styles.group }>
-						<TextInput style={ styles.input } keyboardAppearance='dark' autoCapitalize={ false } keyboardType='email-address' placeholder='Correo Electrónico'/>
+						<TextInput style={ styles.input } keyboardAppearance='dark' keyboardType='email-address' placeholder='Correo Electrónico'/>
 						<TextInput style={ styles.input } keyboardAppearance='dark' password placeholder='Contraseña'/>
 					</View>
 
@@ -71,7 +71,7 @@ export default class Login extends React.Component {
 					Crear una cuenta | No tienes cuenta?
 				</Text>
 
-      </View>
-    )
-  }
+			</View>
+		)
+	}
 }
