@@ -9,9 +9,9 @@ export default class WalMartApp extends Component {
     return (
       <Router hideNavBar>
         <Scene key='root'>
-          <Scene key='login' component={Login} />
+          <Scene key='login' component={Login} initial />
+          <Scene key='main' component={Main} />
           <Scene key='barScanner' component={BarScanner} />
-          <Scene key='main' component={Main} initial />
         </Scene>
       </Router>
     )

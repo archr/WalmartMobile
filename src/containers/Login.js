@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, TextInput, StyleSheet, StatusBar, TouchableHighlight } from 'react-native'
+import { Actions } from 'react-native-router-flux';
 
 let styles = StyleSheet.create({
 	container: {
@@ -44,6 +45,11 @@ let styles = StyleSheet.create({
 });
 
 export default class Login extends React.Component {
+
+	login() {
+		Actions.main();
+	}
+
   render () {
     return (
       <View style={ styles.container }>
@@ -56,7 +62,7 @@ export default class Login extends React.Component {
 						<TextInput style={ styles.input } keyboardAppearance='dark' password placeholder='Contraseña'/>
 					</View>
 
-					<TouchableHighlight type='submit' style={ styles.submit }>
+					<TouchableHighlight type='submit' style={ styles.submit } onPress={ () => this.login() }>
 						<Text style={ styles.submitText }>Ingresar</Text>
 					</TouchableHighlight>
 				</View>
