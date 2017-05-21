@@ -2,9 +2,15 @@ import React from 'react'
 import { TouchableHighlight, Text, StyleSheet } from 'react-native'
 
 export default class ButtonRounded extends React.Component {
+  static defaultProps = {
+    padding: 10
+  }
+
   render () {
+    const { padding } = this.props
+
     return (
-      <TouchableHighlight type='submit' style={styles.submit} onPress={this.props.onPress}>
+      <TouchableHighlight type='submit' style={[styles.submit, { padding }]} onPress={this.props.onPress}>
         <Text style={styles.submitText}>{this.props.children}</Text>
       </TouchableHighlight>
     )
@@ -14,7 +20,6 @@ export default class ButtonRounded extends React.Component {
 const styles = StyleSheet.create({
   submit: {
     backgroundColor: '#8DD50E',
-    padding: 10,
     borderRadius: 10
   },
   submitText: {

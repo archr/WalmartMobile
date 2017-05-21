@@ -1,9 +1,11 @@
 import React from 'react'
-import { Alert, View, StatusBar, StyleSheet, Dimensions } from 'react-native'
+import { Alert, ActivityIndicator, View, StatusBar, StyleSheet, Dimensions } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import UserHeader from '~components/UserHeader'
 import MenuItem from '~components/MenuItem'
 import ButtonRounded from '~components/ButtonRounded'
+import ModalUpdateBalance from './ModalUpdateBalance'
 
 const { width } = Dimensions.get('window')
 
@@ -12,7 +14,8 @@ export default class Main extends React.Component {
     super()
 
     this.state = {
-      balance: 552
+      balance: 552,
+      showModal: false
     }
   }
 
@@ -23,7 +26,7 @@ export default class Main extends React.Component {
       {
         text: 'OK',
         onPress: () => {
-          this.setState({ balance }, () => Actions.pop())
+          this.setState({ balance })
         }
       }
     ]
@@ -31,10 +34,23 @@ export default class Main extends React.Component {
     Actions.barScanner({
       passProps: {
         onScan: () => {
-          Alert.alert('Nuevo saldo', message, buttons)
+          Actions.pop()
+          this.setState({ updating: true })
+          setTimeout(() => {
+            this.setState({ updating: false })
+            Alert.alert('Nuevo saldo', message, buttons)
+          }, 1000)
         }
       }
     })
+  }
+
+  showModal = () => {
+    this.setState({ showModal: true })
+  }
+
+  onUpdateBalance = balance => {
+    this.setState({ showModal: false, balance })
   }
 
   render () {
@@ -42,20 +58,40 @@ export default class Main extends React.Component {
       <View style={styles.container}>
         <StatusBar backgroundColor='#2684e2' barStyle='light-content' />
         <View style={styles.content}>
+          {this.state.updating &&
+            <View style={styles.loading}>
+              <ActivityIndicator color='#FFF' />
+            </View>}
+
+          {this.state.balance > 0 &&
+            <View style={styles.gif}>
+              <Icon.Button name='gift' backgroundColor='#3b5998' onPress={this.showModal}>
+                Donar
+              </Icon.Button>
+            </View>}
           <UserHeader balance={this.state.balance} />
-          <View style={[styles.menuContainer, { width }]}>
-            <MenuItem title='Mis listas' icon='list' />
-            <MenuItem title='Mis pedidos' icon='shopping-cart' />
-            <MenuItem title='Direcciónes' icon='location-on' />
-            <MenuItem title='Historial' icon='history' />
-            <MenuItem title='Ajustes' icon='settings' />
-            <MenuItem title='Servicio al cliente' icon='contact-mail' />
+          <View style={[styles.body, { width }]}>
+            <View style={[styles.menuContainer, { width }]}>
+              <MenuItem title='Mis listas' icon='list' />
+              <MenuItem title='Mis pedidos' icon='shopping-cart' />
+              <MenuItem title='Direcciónes' icon='location-on' />
+              <MenuItem title='Historial' icon='history' />
+              <MenuItem title='Ajustes' icon='settings' />
+              <MenuItem title='Servicio al cliente' icon='contact-mail' />
+            </View>
 
             <View style={styles.barScannerContainer}>
               <ButtonRounded onPress={this.onPressScanTicket}>Escanear Ticket</ButtonRounded>
             </View>
           </View>
         </View>
+
+        {this.state.showModal &&
+          <ModalUpdateBalance
+            onClose={() => this.setState({ showModal: false })}
+            balance={this.state.balance}
+            onUpdateBalance={this.onUpdateBalance}
+          />}
       </View>
     )
   }
@@ -78,20 +114,29 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center'
   },
-  menuContainer: {
+  body: {
     flex: 1,
     marginTop: 20,
     width: 300,
     backgroundColor: 'white',
+    justifyContent: 'space-between'
+  },
+  menuContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap'
   },
   barScannerContainer: {
     width,
-    paddingLeft: 20,
-    paddingRight: 20,
-    height: 60,
+    padding: 20
+  },
+  gif: {
     position: 'absolute',
-    bottom: 0
+    top: 10,
+    right: 10
+  },
+  loading: {
+    position: 'absolute',
+    top: 10,
+    left: 10
   }
 })
