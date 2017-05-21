@@ -47,7 +47,7 @@ let styles = StyleSheet.create({
 export default class Login extends React.Component {
 
 	login() {
-		Actions.main();
+		Actions.main({ type: 'replace' });
 	}
 
   render () {
